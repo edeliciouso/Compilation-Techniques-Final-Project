@@ -1,0 +1,472 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> sentence
+Rule 1     sentence -> subject predicate
+Rule 2     sentence -> subject predicate conjunction sentence
+Rule 3     sentence -> subject predicate prepositional_phrase
+Rule 4     sentence -> subject predicate prepositional_phrase conjunction sentence
+Rule 5     subject -> noun_phrase
+Rule 6     subject -> PRONOUN
+Rule 7     predicate -> verb_phrase
+Rule 8     predicate -> verb_phrase object
+Rule 9     predicate -> verb_phrase adverb_phrase
+Rule 10    predicate -> verb_phrase prepositional_phrase
+Rule 11    object -> noun_phrase
+Rule 12    prepositional_phrase -> PREPOSITION noun_phrase
+Rule 13    adverb_phrase -> ADVERB
+Rule 14    adverb_phrase -> ADVERB ADVERB
+Rule 15    noun_phrase -> NOUN
+Rule 16    noun_phrase -> DETERMINER NOUN
+Rule 17    noun_phrase -> DETERMINER ADJECTIVE NOUN
+Rule 18    noun_phrase -> ADJECTIVE NOUN
+Rule 19    verb_phrase -> VERB
+Rule 20    verb_phrase -> VERB noun_phrase
+Rule 21    verb_phrase -> VERB noun_phrase prepositional_phrase
+Rule 22    conjunction -> CONJUNCTION
+
+Terminals, with rules where they appear
+
+ADJECTIVE            : 17 18
+ADVERB               : 13 14 14
+CONJUNCTION          : 22
+DETERMINER           : 16 17
+NOUN                 : 15 16 17 18
+PREPOSITION          : 12
+PRONOUN              : 6
+VERB                 : 19 20 21
+error                : 
+
+Nonterminals, with rules where they appear
+
+adverb_phrase        : 9
+conjunction          : 2 4
+noun_phrase          : 5 11 12 20 21
+object               : 8
+predicate            : 1 2 3 4
+prepositional_phrase : 3 4 10 21
+sentence             : 2 4 0
+subject              : 1 2 3 4
+verb_phrase          : 7 8 9 10
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . sentence
+    (1) sentence -> . subject predicate
+    (2) sentence -> . subject predicate conjunction sentence
+    (3) sentence -> . subject predicate prepositional_phrase
+    (4) sentence -> . subject predicate prepositional_phrase conjunction sentence
+    (5) subject -> . noun_phrase
+    (6) subject -> . PRONOUN
+    (15) noun_phrase -> . NOUN
+    (16) noun_phrase -> . DETERMINER NOUN
+    (17) noun_phrase -> . DETERMINER ADJECTIVE NOUN
+    (18) noun_phrase -> . ADJECTIVE NOUN
+
+    PRONOUN         shift and go to state 4
+    NOUN            shift and go to state 5
+    DETERMINER      shift and go to state 6
+    ADJECTIVE       shift and go to state 7
+
+    sentence                       shift and go to state 1
+    subject                        shift and go to state 2
+    noun_phrase                    shift and go to state 3
+
+state 1
+
+    (0) S' -> sentence .
+
+
+
+state 2
+
+    (1) sentence -> subject . predicate
+    (2) sentence -> subject . predicate conjunction sentence
+    (3) sentence -> subject . predicate prepositional_phrase
+    (4) sentence -> subject . predicate prepositional_phrase conjunction sentence
+    (7) predicate -> . verb_phrase
+    (8) predicate -> . verb_phrase object
+    (9) predicate -> . verb_phrase adverb_phrase
+    (10) predicate -> . verb_phrase prepositional_phrase
+    (19) verb_phrase -> . VERB
+    (20) verb_phrase -> . VERB noun_phrase
+    (21) verb_phrase -> . VERB noun_phrase prepositional_phrase
+
+    VERB            shift and go to state 10
+
+    predicate                      shift and go to state 8
+    verb_phrase                    shift and go to state 9
+
+state 3
+
+    (5) subject -> noun_phrase .
+
+    VERB            reduce using rule 5 (subject -> noun_phrase .)
+
+
+state 4
+
+    (6) subject -> PRONOUN .
+
+    VERB            reduce using rule 6 (subject -> PRONOUN .)
+
+
+state 5
+
+    (15) noun_phrase -> NOUN .
+
+    VERB            reduce using rule 15 (noun_phrase -> NOUN .)
+    CONJUNCTION     reduce using rule 15 (noun_phrase -> NOUN .)
+    PREPOSITION     reduce using rule 15 (noun_phrase -> NOUN .)
+    $end            reduce using rule 15 (noun_phrase -> NOUN .)
+    ADVERB          reduce using rule 15 (noun_phrase -> NOUN .)
+    NOUN            reduce using rule 15 (noun_phrase -> NOUN .)
+    DETERMINER      reduce using rule 15 (noun_phrase -> NOUN .)
+    ADJECTIVE       reduce using rule 15 (noun_phrase -> NOUN .)
+
+
+state 6
+
+    (16) noun_phrase -> DETERMINER . NOUN
+    (17) noun_phrase -> DETERMINER . ADJECTIVE NOUN
+
+    NOUN            shift and go to state 11
+    ADJECTIVE       shift and go to state 12
+
+
+state 7
+
+    (18) noun_phrase -> ADJECTIVE . NOUN
+
+    NOUN            shift and go to state 13
+
+
+state 8
+
+    (1) sentence -> subject predicate .
+    (2) sentence -> subject predicate . conjunction sentence
+    (3) sentence -> subject predicate . prepositional_phrase
+    (4) sentence -> subject predicate . prepositional_phrase conjunction sentence
+    (22) conjunction -> . CONJUNCTION
+    (12) prepositional_phrase -> . PREPOSITION noun_phrase
+
+    $end            reduce using rule 1 (sentence -> subject predicate .)
+    CONJUNCTION     shift and go to state 16
+    PREPOSITION     shift and go to state 17
+
+    conjunction                    shift and go to state 14
+    prepositional_phrase           shift and go to state 15
+
+state 9
+
+    (7) predicate -> verb_phrase .
+    (8) predicate -> verb_phrase . object
+    (9) predicate -> verb_phrase . adverb_phrase
+    (10) predicate -> verb_phrase . prepositional_phrase
+    (11) object -> . noun_phrase
+    (13) adverb_phrase -> . ADVERB
+    (14) adverb_phrase -> . ADVERB ADVERB
+    (12) prepositional_phrase -> . PREPOSITION noun_phrase
+    (15) noun_phrase -> . NOUN
+    (16) noun_phrase -> . DETERMINER NOUN
+    (17) noun_phrase -> . DETERMINER ADJECTIVE NOUN
+    (18) noun_phrase -> . ADJECTIVE NOUN
+
+  ! shift/reduce conflict for PREPOSITION resolved as shift
+    CONJUNCTION     reduce using rule 7 (predicate -> verb_phrase .)
+    $end            reduce using rule 7 (predicate -> verb_phrase .)
+    ADVERB          shift and go to state 22
+    PREPOSITION     shift and go to state 17
+    NOUN            shift and go to state 5
+    DETERMINER      shift and go to state 6
+    ADJECTIVE       shift and go to state 7
+
+  ! PREPOSITION     [ reduce using rule 7 (predicate -> verb_phrase .) ]
+
+    object                         shift and go to state 18
+    adverb_phrase                  shift and go to state 19
+    prepositional_phrase           shift and go to state 20
+    noun_phrase                    shift and go to state 21
+
+state 10
+
+    (19) verb_phrase -> VERB .
+    (20) verb_phrase -> VERB . noun_phrase
+    (21) verb_phrase -> VERB . noun_phrase prepositional_phrase
+    (15) noun_phrase -> . NOUN
+    (16) noun_phrase -> . DETERMINER NOUN
+    (17) noun_phrase -> . DETERMINER ADJECTIVE NOUN
+    (18) noun_phrase -> . ADJECTIVE NOUN
+
+  ! shift/reduce conflict for NOUN resolved as shift
+  ! shift/reduce conflict for DETERMINER resolved as shift
+  ! shift/reduce conflict for ADJECTIVE resolved as shift
+    ADVERB          reduce using rule 19 (verb_phrase -> VERB .)
+    PREPOSITION     reduce using rule 19 (verb_phrase -> VERB .)
+    CONJUNCTION     reduce using rule 19 (verb_phrase -> VERB .)
+    $end            reduce using rule 19 (verb_phrase -> VERB .)
+    NOUN            shift and go to state 5
+    DETERMINER      shift and go to state 6
+    ADJECTIVE       shift and go to state 7
+
+  ! NOUN            [ reduce using rule 19 (verb_phrase -> VERB .) ]
+  ! DETERMINER      [ reduce using rule 19 (verb_phrase -> VERB .) ]
+  ! ADJECTIVE       [ reduce using rule 19 (verb_phrase -> VERB .) ]
+
+    noun_phrase                    shift and go to state 23
+
+state 11
+
+    (16) noun_phrase -> DETERMINER NOUN .
+
+    VERB            reduce using rule 16 (noun_phrase -> DETERMINER NOUN .)
+    CONJUNCTION     reduce using rule 16 (noun_phrase -> DETERMINER NOUN .)
+    PREPOSITION     reduce using rule 16 (noun_phrase -> DETERMINER NOUN .)
+    $end            reduce using rule 16 (noun_phrase -> DETERMINER NOUN .)
+    ADVERB          reduce using rule 16 (noun_phrase -> DETERMINER NOUN .)
+    NOUN            reduce using rule 16 (noun_phrase -> DETERMINER NOUN .)
+    DETERMINER      reduce using rule 16 (noun_phrase -> DETERMINER NOUN .)
+    ADJECTIVE       reduce using rule 16 (noun_phrase -> DETERMINER NOUN .)
+
+
+state 12
+
+    (17) noun_phrase -> DETERMINER ADJECTIVE . NOUN
+
+    NOUN            shift and go to state 24
+
+
+state 13
+
+    (18) noun_phrase -> ADJECTIVE NOUN .
+
+    VERB            reduce using rule 18 (noun_phrase -> ADJECTIVE NOUN .)
+    CONJUNCTION     reduce using rule 18 (noun_phrase -> ADJECTIVE NOUN .)
+    PREPOSITION     reduce using rule 18 (noun_phrase -> ADJECTIVE NOUN .)
+    $end            reduce using rule 18 (noun_phrase -> ADJECTIVE NOUN .)
+    ADVERB          reduce using rule 18 (noun_phrase -> ADJECTIVE NOUN .)
+    NOUN            reduce using rule 18 (noun_phrase -> ADJECTIVE NOUN .)
+    DETERMINER      reduce using rule 18 (noun_phrase -> ADJECTIVE NOUN .)
+    ADJECTIVE       reduce using rule 18 (noun_phrase -> ADJECTIVE NOUN .)
+
+
+state 14
+
+    (2) sentence -> subject predicate conjunction . sentence
+    (1) sentence -> . subject predicate
+    (2) sentence -> . subject predicate conjunction sentence
+    (3) sentence -> . subject predicate prepositional_phrase
+    (4) sentence -> . subject predicate prepositional_phrase conjunction sentence
+    (5) subject -> . noun_phrase
+    (6) subject -> . PRONOUN
+    (15) noun_phrase -> . NOUN
+    (16) noun_phrase -> . DETERMINER NOUN
+    (17) noun_phrase -> . DETERMINER ADJECTIVE NOUN
+    (18) noun_phrase -> . ADJECTIVE NOUN
+
+    PRONOUN         shift and go to state 4
+    NOUN            shift and go to state 5
+    DETERMINER      shift and go to state 6
+    ADJECTIVE       shift and go to state 7
+
+    subject                        shift and go to state 2
+    sentence                       shift and go to state 25
+    noun_phrase                    shift and go to state 3
+
+state 15
+
+    (3) sentence -> subject predicate prepositional_phrase .
+    (4) sentence -> subject predicate prepositional_phrase . conjunction sentence
+    (22) conjunction -> . CONJUNCTION
+
+    $end            reduce using rule 3 (sentence -> subject predicate prepositional_phrase .)
+    CONJUNCTION     shift and go to state 16
+
+    conjunction                    shift and go to state 26
+
+state 16
+
+    (22) conjunction -> CONJUNCTION .
+
+    PRONOUN         reduce using rule 22 (conjunction -> CONJUNCTION .)
+    NOUN            reduce using rule 22 (conjunction -> CONJUNCTION .)
+    DETERMINER      reduce using rule 22 (conjunction -> CONJUNCTION .)
+    ADJECTIVE       reduce using rule 22 (conjunction -> CONJUNCTION .)
+
+
+state 17
+
+    (12) prepositional_phrase -> PREPOSITION . noun_phrase
+    (15) noun_phrase -> . NOUN
+    (16) noun_phrase -> . DETERMINER NOUN
+    (17) noun_phrase -> . DETERMINER ADJECTIVE NOUN
+    (18) noun_phrase -> . ADJECTIVE NOUN
+
+    NOUN            shift and go to state 5
+    DETERMINER      shift and go to state 6
+    ADJECTIVE       shift and go to state 7
+
+    noun_phrase                    shift and go to state 27
+
+state 18
+
+    (8) predicate -> verb_phrase object .
+
+    CONJUNCTION     reduce using rule 8 (predicate -> verb_phrase object .)
+    PREPOSITION     reduce using rule 8 (predicate -> verb_phrase object .)
+    $end            reduce using rule 8 (predicate -> verb_phrase object .)
+
+
+state 19
+
+    (9) predicate -> verb_phrase adverb_phrase .
+
+    CONJUNCTION     reduce using rule 9 (predicate -> verb_phrase adverb_phrase .)
+    PREPOSITION     reduce using rule 9 (predicate -> verb_phrase adverb_phrase .)
+    $end            reduce using rule 9 (predicate -> verb_phrase adverb_phrase .)
+
+
+state 20
+
+    (10) predicate -> verb_phrase prepositional_phrase .
+
+    CONJUNCTION     reduce using rule 10 (predicate -> verb_phrase prepositional_phrase .)
+    PREPOSITION     reduce using rule 10 (predicate -> verb_phrase prepositional_phrase .)
+    $end            reduce using rule 10 (predicate -> verb_phrase prepositional_phrase .)
+
+
+state 21
+
+    (11) object -> noun_phrase .
+
+    CONJUNCTION     reduce using rule 11 (object -> noun_phrase .)
+    PREPOSITION     reduce using rule 11 (object -> noun_phrase .)
+    $end            reduce using rule 11 (object -> noun_phrase .)
+
+
+state 22
+
+    (13) adverb_phrase -> ADVERB .
+    (14) adverb_phrase -> ADVERB . ADVERB
+
+    CONJUNCTION     reduce using rule 13 (adverb_phrase -> ADVERB .)
+    PREPOSITION     reduce using rule 13 (adverb_phrase -> ADVERB .)
+    $end            reduce using rule 13 (adverb_phrase -> ADVERB .)
+    ADVERB          shift and go to state 28
+
+
+state 23
+
+    (20) verb_phrase -> VERB noun_phrase .
+    (21) verb_phrase -> VERB noun_phrase . prepositional_phrase
+    (12) prepositional_phrase -> . PREPOSITION noun_phrase
+
+  ! shift/reduce conflict for PREPOSITION resolved as shift
+    ADVERB          reduce using rule 20 (verb_phrase -> VERB noun_phrase .)
+    NOUN            reduce using rule 20 (verb_phrase -> VERB noun_phrase .)
+    DETERMINER      reduce using rule 20 (verb_phrase -> VERB noun_phrase .)
+    ADJECTIVE       reduce using rule 20 (verb_phrase -> VERB noun_phrase .)
+    CONJUNCTION     reduce using rule 20 (verb_phrase -> VERB noun_phrase .)
+    $end            reduce using rule 20 (verb_phrase -> VERB noun_phrase .)
+    PREPOSITION     shift and go to state 17
+
+  ! PREPOSITION     [ reduce using rule 20 (verb_phrase -> VERB noun_phrase .) ]
+
+    prepositional_phrase           shift and go to state 29
+
+state 24
+
+    (17) noun_phrase -> DETERMINER ADJECTIVE NOUN .
+
+    VERB            reduce using rule 17 (noun_phrase -> DETERMINER ADJECTIVE NOUN .)
+    CONJUNCTION     reduce using rule 17 (noun_phrase -> DETERMINER ADJECTIVE NOUN .)
+    PREPOSITION     reduce using rule 17 (noun_phrase -> DETERMINER ADJECTIVE NOUN .)
+    $end            reduce using rule 17 (noun_phrase -> DETERMINER ADJECTIVE NOUN .)
+    ADVERB          reduce using rule 17 (noun_phrase -> DETERMINER ADJECTIVE NOUN .)
+    NOUN            reduce using rule 17 (noun_phrase -> DETERMINER ADJECTIVE NOUN .)
+    DETERMINER      reduce using rule 17 (noun_phrase -> DETERMINER ADJECTIVE NOUN .)
+    ADJECTIVE       reduce using rule 17 (noun_phrase -> DETERMINER ADJECTIVE NOUN .)
+
+
+state 25
+
+    (2) sentence -> subject predicate conjunction sentence .
+
+    $end            reduce using rule 2 (sentence -> subject predicate conjunction sentence .)
+
+
+state 26
+
+    (4) sentence -> subject predicate prepositional_phrase conjunction . sentence
+    (1) sentence -> . subject predicate
+    (2) sentence -> . subject predicate conjunction sentence
+    (3) sentence -> . subject predicate prepositional_phrase
+    (4) sentence -> . subject predicate prepositional_phrase conjunction sentence
+    (5) subject -> . noun_phrase
+    (6) subject -> . PRONOUN
+    (15) noun_phrase -> . NOUN
+    (16) noun_phrase -> . DETERMINER NOUN
+    (17) noun_phrase -> . DETERMINER ADJECTIVE NOUN
+    (18) noun_phrase -> . ADJECTIVE NOUN
+
+    PRONOUN         shift and go to state 4
+    NOUN            shift and go to state 5
+    DETERMINER      shift and go to state 6
+    ADJECTIVE       shift and go to state 7
+
+    subject                        shift and go to state 2
+    sentence                       shift and go to state 30
+    noun_phrase                    shift and go to state 3
+
+state 27
+
+    (12) prepositional_phrase -> PREPOSITION noun_phrase .
+
+    CONJUNCTION     reduce using rule 12 (prepositional_phrase -> PREPOSITION noun_phrase .)
+    $end            reduce using rule 12 (prepositional_phrase -> PREPOSITION noun_phrase .)
+    PREPOSITION     reduce using rule 12 (prepositional_phrase -> PREPOSITION noun_phrase .)
+    ADVERB          reduce using rule 12 (prepositional_phrase -> PREPOSITION noun_phrase .)
+    NOUN            reduce using rule 12 (prepositional_phrase -> PREPOSITION noun_phrase .)
+    DETERMINER      reduce using rule 12 (prepositional_phrase -> PREPOSITION noun_phrase .)
+    ADJECTIVE       reduce using rule 12 (prepositional_phrase -> PREPOSITION noun_phrase .)
+
+
+state 28
+
+    (14) adverb_phrase -> ADVERB ADVERB .
+
+    CONJUNCTION     reduce using rule 14 (adverb_phrase -> ADVERB ADVERB .)
+    PREPOSITION     reduce using rule 14 (adverb_phrase -> ADVERB ADVERB .)
+    $end            reduce using rule 14 (adverb_phrase -> ADVERB ADVERB .)
+
+
+state 29
+
+    (21) verb_phrase -> VERB noun_phrase prepositional_phrase .
+
+    ADVERB          reduce using rule 21 (verb_phrase -> VERB noun_phrase prepositional_phrase .)
+    PREPOSITION     reduce using rule 21 (verb_phrase -> VERB noun_phrase prepositional_phrase .)
+    NOUN            reduce using rule 21 (verb_phrase -> VERB noun_phrase prepositional_phrase .)
+    DETERMINER      reduce using rule 21 (verb_phrase -> VERB noun_phrase prepositional_phrase .)
+    ADJECTIVE       reduce using rule 21 (verb_phrase -> VERB noun_phrase prepositional_phrase .)
+    CONJUNCTION     reduce using rule 21 (verb_phrase -> VERB noun_phrase prepositional_phrase .)
+    $end            reduce using rule 21 (verb_phrase -> VERB noun_phrase prepositional_phrase .)
+
+
+state 30
+
+    (4) sentence -> subject predicate prepositional_phrase conjunction sentence .
+
+    $end            reduce using rule 4 (sentence -> subject predicate prepositional_phrase conjunction sentence .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for PREPOSITION in state 9 resolved as shift
+WARNING: shift/reduce conflict for NOUN in state 10 resolved as shift
+WARNING: shift/reduce conflict for DETERMINER in state 10 resolved as shift
+WARNING: shift/reduce conflict for ADJECTIVE in state 10 resolved as shift
+WARNING: shift/reduce conflict for PREPOSITION in state 23 resolved as shift
